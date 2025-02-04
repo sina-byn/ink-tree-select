@@ -2,7 +2,7 @@ import { Box, Text, useInput } from 'ink';
 import React, { useMemo, useState, useEffect } from 'react';
 
 // * utils
-import { flattenTree, stringifyTree, Tree } from '../utils/index.js';
+import { flattenTree, stringifyTree, type Tree } from '../utils/index.js';
 
 // * components
 import Hint from './Hint.js';
