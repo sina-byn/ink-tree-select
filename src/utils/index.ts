@@ -97,6 +97,7 @@ export const stringifyTree = (tree: Tree, activePath: string) => {
 };
 
 export const flattenTree = (tree: Tree): string[] => {
-  if (tree.branches.length === 0) return [tree.name];
-  return tree.branches.flatMap(node => flattenTree(node).map(subPath => `${tree.name}/${subPath}`));
+  return tree.fullPath === './'
+    ? tree.branches.flatMap(flattenTree)
+    : [tree.fullPath, ...tree.branches.flatMap(flattenTree)];
 };
