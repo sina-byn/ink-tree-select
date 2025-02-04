@@ -16,7 +16,7 @@ type Branches = Tree['branches'];
 
 type Tree = { name: string; dir?: boolean; branches: Tree[] };
 
-export const readDirectory = (root: string, ignore: string[] = []) => {
+export const readDirectory = (root: string, ignore: string[]) => {
   if (!fs.existsSync(root)) throw new Error(`Could not find '${root}'`);
   if (!fs.statSync(root).isDirectory()) throw new Error(`'${root}' is not a directory`);
 
@@ -31,8 +31,8 @@ export const readDirectory = (root: string, ignore: string[] = []) => {
   return paths;
 };
 
-export const createDirectoryTree = (root: string, rootAlias: string) => {
-  const paths = readDirectory(root);
+export const createDirectoryTree = (root: string, rootAlias: string, ignore: string[] = []) => {
+  const paths = readDirectory(root, ignore);
   const tree: Tree = { name: rootAlias, dir: true, branches: [] };
 
   for (const path of paths) {
