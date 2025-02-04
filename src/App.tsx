@@ -1,11 +1,19 @@
-import React from 'react';
-import { render } from 'ink';
+import { render, Text } from 'ink';
+import React, { useState } from 'react';
 
 // * components
-import TreeSelect from './components/TreeSelect.js';
+import { TreeSelect } from './components/TreeSelect.js';
 
 const App = () => {
-  return <TreeSelect onSelect={activePath => console.log(activePath)} />;
+  const [selectedPath, setSelectedPath] = useState<string>('');
+  const selectHandler = (path: string) => setSelectedPath(path);
+
+  return (
+    <>
+      <TreeSelect onSelect={selectHandler} />
+      {selectedPath.length > 0 && <Text>{selectedPath}</Text>}
+    </>
+  );
 };
 
 render(<App />);
