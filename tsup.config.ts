@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup';
 
 // * constants
-const entry = 'src/index.ts';
+const entry = process.env['NODE_ENV'] === 'production' ? 'src/index.ts' : 'src/App.tsx';
 
 export default defineConfig({
   format: 'esm',
