@@ -53,10 +53,8 @@ export const VirtualTreeSelect = ({
 
   return (
     <Box flexDirection='column' rowGap={1}>
-      <Text dimColor>{stringifyTree(tree, activePath, indicatorColor)}</Text>
-      <Text dimColor color={previewColor ?? 'blue'}>
-        {activePath}
-      </Text>
+      <Text>{stringifyTree(tree, activePath, indicatorColor)}</Text>
+      <Text color={previewColor ?? 'blue'}>{activePath}</Text>
     </Box>
   );
 };
