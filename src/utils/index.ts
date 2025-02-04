@@ -99,7 +99,7 @@ export const stringifyBranches = (
   return stringified;
 };
 
-export const stringifyTree = (tree: Tree, activePath: string, color: Color) => {
+export const stringifyTree = (tree: Tree, activePath: string, color: Color = 'white') => {
   return tree.name + stringifyBranches(tree.branches, activePath, color);
 };
 
