@@ -89,7 +89,7 @@ export const stringifyBranches = (
       isLastNode ? BRE : BR,
       isActivePath ? fmt('\u25CF ') : '',
       isActivePath ? fmt(node.name) : node.name,
-      fmt(node.dir ? '/' : ''),
+      isActivePath ? fmt(node.dir ? '/' : '') : node.dir ? '/' : '',
     ]
       .flat()
       .join('');
