@@ -77,6 +77,7 @@ export const stringifyBranches = (
   for (let i = 0; i < branches.length; i++) {
     const isLastNode = i === branches.length - 1;
     const node = branches[i]!;
+    const isActivePath = activePath === node.fullPath;
 
     const line = [
       LF,
@@ -86,8 +87,8 @@ export const stringifyBranches = (
           : Array(level).fill(PBR)
         : Array.from({ length: level }, (_, index) => (index < level ? PBR : SP)),
       isLastNode ? BRE : BR,
-      activePath === node.fullPath ? fmt('\u25CF ') : '',
-      fmt(node.name),
+      isActivePath ? fmt('\u25CF ') : '',
+      isActivePath ? fmt(node.name) : node.name,
       fmt(node.dir ? '/' : ''),
     ]
       .flat()
