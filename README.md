@@ -4,6 +4,14 @@ Tree select component built for [ink](https://www.npmjs.com/package/ink)
 
 Please consider following this project's author, [Sina Bayandorian](https://github.com/sina-byn), and consider starring the project to show your :heart: and support.
 
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Components](#components)
+  - [TreeSelect](#treeselect-)
+  - [VirtualTreeSelect](#virtualtreeselect-)
+
 ![Demo GIF](assets/demo.gif)
 
 ## Installation
@@ -16,6 +24,7 @@ npm i ink-tree-select
 
 ```js
 // * index.tsx
+// * visit the components section if you need further customization
 
 import { render, Text } from 'ink';
 import React, { useState } from 'react';
@@ -36,7 +45,9 @@ const App = () => {
 render(<App />);
 ```
 
-## Props
+## Components
+
+### `<TreeSelect />`
 
 |          |                    Type                     | Default |              Description               |
 |----------|---------------------------------------------|---------|----------------------------------------|
@@ -45,13 +56,39 @@ render(<App />);
 | onSelect |      `(selectedPath: string) => void;`      |         |    Triggers once user hits `Enter`     |
 | options  |            `TreeSelectOptions`              |  `{ }`  |                                        |
 
-## TreeSelectOptions
+#### TreeSelectOptions
 
 ```ts
 type TreeSelectOptions = Partial<{
   // * directories to ignore - read https://www.npmjs.com/package/fast-glob#ignore
   ignore: string[];
   rootAlias: string; // default to '.' - tree's root
+  previewColor: Color; // path preview text color
+  indicatorColor: Color; // ● color
+}>;
+```
+
+### `<VirtualTreeSelect />`
+
+Accepts a custom tree instead of a directory to scan
+
+|          |                    Type                     | Default |              Description               |
+|----------|---------------------------------------------|---------|----------------------------------------|
+|   tree   |                   `Tree`                    |         |         Custom directory tree          |
+| onChange |       `(activePath: string) => void;`       |         | Triggers on every selected path change |
+| onSelect |      `(selectedPath: string) => void;`      |         |    Triggers once user hits `Enter`     |
+| options  |         `VirtualTreeSelectOptions`          |  `{ }`  |                                        |
+
+#### Tree
+
+```ts
+type Tree = { name: string; fullPath: string; branches: Tree[]; dir?: boolean };
+```
+
+#### VirtualTreeSelectOptions
+
+```ts
+type VirtualTreeSelectOptions = Partial<{
   previewColor: Color; // path preview text color
   indicatorColor: Color; // ● color
 }>;
