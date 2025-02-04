@@ -10,7 +10,7 @@ export type Color = TextProps['color'];
 export type TreeSelectProps = {
   options?: TreeSelectOptions;
   onChange?: (activePath: string) => void;
-  onSelect?: (activePath: string) => void;
+  onSelect?: (selectedPath: string) => void;
 };
 
 export type TreeSelectOptions = Partial<{
