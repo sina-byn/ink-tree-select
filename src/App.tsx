@@ -10,7 +10,7 @@ const App = () => {
 
   return (
     <>
-      <TreeSelect onSelect={selectHandler} />
+      <TreeSelect root='./' onSelect={selectHandler} />
       {selectedPath.length > 0 && <Text>{selectedPath}</Text>}
     </>
   );

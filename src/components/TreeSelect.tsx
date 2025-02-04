@@ -8,6 +8,7 @@ import { flattenTree, stringifyTree, createDirectoryTree } from '../utils/index.
 export type Color = TextProps['color'];
 
 export type TreeSelectProps = {
+  root: string;
   options?: TreeSelectOptions;
   onChange?: (activePath: string) => void;
   onSelect?: (selectedPath: string) => void;
@@ -20,13 +21,13 @@ export type TreeSelectOptions = Partial<{
   indicatorColor: Color;
 }>;
 
-export const TreeSelect = ({ onChange, onSelect, options = {} }: TreeSelectProps) => {
+export const TreeSelect = ({ root, onChange, onSelect, options = {} }: TreeSelectProps) => {
   const { ignore, rootAlias, previewColor, indicatorColor } = options;
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [selected, setSelected] = useState<boolean>(false);
 
-  const tree = useMemo(() => createDirectoryTree('./', { rootAlias, ignore }), []); // ! add root to deps
-  const flattenedTree = useMemo(() => flattenTree(tree), []); // ! add root to deps
+  const tree = useMemo(() => createDirectoryTree(root, { rootAlias, ignore }), [root]);
+  const flattenedTree = useMemo(() => flattenTree(tree), [root]);
   const activePath = flattenedTree[activeIndex]!;
   const maxIndex = flattenedTree.length - 1;
 
