@@ -1,5 +1,5 @@
 import { Box, Text, useInput, type TextProps } from 'ink';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 
 // * utils
 import { flattenTree, stringifyTree, createDirectoryTree } from '../utils/index.js';
