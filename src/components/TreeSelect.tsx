@@ -5,22 +5,22 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { flattenTree, stringifyTree, createDirectoryTree } from '../utils/index.js';
 
 // * types
-type Color = TextProps['color'];
+export type Color = TextProps['color'];
 
-type TreeSelectProps = {
+export type TreeSelectProps = {
   options?: TreeSelectOptions;
   onChange?: (activePath: string) => void;
   onSelect?: (activePath: string) => void;
 };
 
-type TreeSelectOptions = Partial<{
+export type TreeSelectOptions = Partial<{
   ignore: string[];
   rootAlias: string;
   previewColor: Color;
   indicatorColor: Color;
 }>;
 
-const TreeSelect = ({ onChange, onSelect, options = {} }: TreeSelectProps) => {
+export const TreeSelect = ({ onChange, onSelect, options = {} }: TreeSelectProps) => {
   const { ignore, rootAlias, previewColor, indicatorColor } = options;
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [selected, setSelected] = useState<boolean>(false);
@@ -59,5 +59,3 @@ const TreeSelect = ({ onChange, onSelect, options = {} }: TreeSelectProps) => {
     </Box>
   );
 };
-
-export default TreeSelect;
