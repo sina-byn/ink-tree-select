@@ -14,7 +14,7 @@ const PBR = '│   '; // * Pre Branch
 // * types
 type Branches = Tree['branches'];
 
-type Tree = { name: string; dir?: boolean; branches: Tree[] };
+type Tree = { name: string; fullPath: string; branches: Tree[]; dir?: boolean };
 
 export const readDirectory = (root: string, ignore: string[]) => {
   if (!fs.existsSync(root)) throw new Error(`Could not find '${root}'`);
@@ -33,18 +33,20 @@ export const readDirectory = (root: string, ignore: string[]) => {
 
 export const createDirectoryTree = (root: string, rootAlias: string, ignore: string[] = []) => {
   const paths = readDirectory(root, ignore);
-  const tree: Tree = { name: rootAlias, dir: true, branches: [] };
+  const tree: Tree = { name: rootAlias, dir: true, fullPath: root, branches: [] };
 
   for (const path of paths) {
     const pathChunks = path.replace(root, '').split('/').filter(Boolean);
     const isDir = path.endsWith('/');
     let subTree = tree.branches;
 
-    for (const chunk of pathChunks) {
+    for (let i = 0; i < pathChunks.length; i++) {
+      const fullPath = ['.', ...pathChunks.slice(0, i + 1)].join('/');
+      const chunk = pathChunks[i]!;
       let node = subTree.find(n => n.name === chunk);
 
       if (!node) {
-        node = { name: chunk, dir: isDir, branches: [] };
+        node = { name: chunk, dir: isDir, fullPath, branches: [] };
         subTree.push(node);
       }
 
@@ -57,6 +59,7 @@ export const createDirectoryTree = (root: string, rootAlias: string, ignore: str
 
 export const stringifyBranches = (
   branches: Branches,
+  activePath: string,
   level: number = 0,
   isParentLastNode: boolean = false
 ) => {
@@ -75,6 +78,7 @@ export const stringifyBranches = (
           : Array(level).fill(PBR)
         : Array.from({ length: level }, (_, index) => (index < level ? PBR : SP)),
       isLastNode ? BRE : BR,
+      activePath === node.fullPath ? '\u25CF ' : '',
       node.name,
       node.dir ? '/' : '',
     ]
@@ -82,14 +86,14 @@ export const stringifyBranches = (
       .join('');
 
     stringified += line;
-    stringified += stringifyBranches(node.branches, level + 1, isLastNode);
+    stringified += stringifyBranches(node.branches, activePath, level + 1, isLastNode);
   }
 
   return stringified;
 };
 
-export const stringifyTree = (tree: Tree) => {
-  return tree.name + stringifyBranches(tree.branches);
+export const stringifyTree = (tree: Tree, activePath: string) => {
+  return tree.name + stringifyBranches(tree.branches, activePath);
 };
 
 export const flattenTree = (tree: Tree): string[] => {
