@@ -43,7 +43,7 @@ render(<App />);
 |   root   |                   string                    |         |         Root directory to scan         |
 | onChange |       `(activePath: string) => void;`       |         | Triggers on every selected path change |
 | onSelect |      `(selectedPath: string) => void;`      |         |    Triggers once user hits `Enter`     |
-| options  | [`TreeSelectOptions`](#treeselectoptions) |  `{ }`  |                                        |
+| options  |            `TreeSelectOptions`              |  `{ }`  |                                        |
 
 ## TreeSelectOptions
 
