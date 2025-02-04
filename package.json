@@ -53,6 +53,9 @@
     "ink",
     "react",
     "typescript",
-    "javascript"
+    "javascript",
+    "directory-tree",
+    "directory-traversal",
+    "directory-tree-generator"
   ]
 }
