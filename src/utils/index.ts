@@ -17,7 +17,7 @@ import { type ForegroundColorName as Color } from 'chalk';
 
 type Branches = Tree['branches'];
 
-type Tree = { name: string; fullPath: string; branches: Tree[]; dir?: boolean };
+export type Tree = { name: string; fullPath: string; branches: Tree[]; dir?: boolean };
 
 type TreeOptions = Partial<{ rootAlias: string; ignore: string[] }>;
 
@@ -101,7 +101,7 @@ export const stringifyBranches = (
   return stringified;
 };
 
-export const stringifyTree = (tree: Tree, activePath: string, color: Color = 'white') => {
+export const stringifyTree = (tree: Tree, activePath: string, color: Color = 'blue') => {
   return tree.name + stringifyBranches(tree.branches, activePath, color);
 };
 
