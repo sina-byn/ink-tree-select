@@ -71,6 +71,7 @@ export const stringifyBranches = (
   isParentLastNode: boolean = false
 ) => {
   if (branches.length === 0) return '';
+  const fmt = chalk[color];
   let stringified = '';
 
   for (let i = 0; i < branches.length; i++) {
@@ -85,9 +86,9 @@ export const stringifyBranches = (
           : Array(level).fill(PBR)
         : Array.from({ length: level }, (_, index) => (index < level ? PBR : SP)),
       isLastNode ? BRE : BR,
-      activePath === node.fullPath ? chalk[color]('\u25CF ') : '',
-      node.name,
-      node.dir ? '/' : '',
+      activePath === node.fullPath ? fmt('\u25CF ') : '',
+      fmt(node.name),
+      fmt(node.dir ? '/' : ''),
     ]
       .flat()
       .join('');
