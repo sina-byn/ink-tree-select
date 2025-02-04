@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup';
 
 // * constants
-const entry = 'src/index.tsx';
+const entry = 'src/index.ts';
 
 export default defineConfig({
   format: 'esm',
