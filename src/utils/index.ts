@@ -87,3 +87,7 @@ export const stringifyBranches = (
 
   return stringified;
 };
+
+export const stringifyTree = (tree: Tree) => {
+  return tree.name + stringifyBranches(tree.branches);
+};
