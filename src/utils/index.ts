@@ -4,7 +4,16 @@ import fs from 'fs';
 import fastGlob from 'fast-glob';
 const { globSync: fg } = fastGlob;
 
+// * constants
+const LF = '\n'; // * Line Feed
+const SP = '    '; // * Space
+const BR = '├── '; // * Branch
+const BRE = '└── '; // * Branch End
+const PBR = '│   '; // * Pre Branch
+
 // * types
+type Branches = Tree['branches'];
+
 type Tree = { name: string; dir?: boolean; branches: Tree[] };
 
 export const readDirectory = (root: string, ignore: string[] = []) => {
@@ -44,4 +53,37 @@ export const createDirectoryTree = (root: string, rootAlias: string) => {
   }
 
   return tree;
+};
+
+export const stringifyBranches = (
+  branches: Branches,
+  level: number = 0,
+  isParentLastNode: boolean = false
+) => {
+  if (branches.length === 0) return '';
+  let stringified = '';
+
+  for (let i = 0; i < branches.length; i++) {
+    const isLastNode = i === branches.length - 1;
+    const node = branches[i]!;
+
+    const line = [
+      LF,
+      isLastNode
+        ? isParentLastNode
+          ? Array.from({ length: level }, (_, index) => (index < level - 1 ? PBR : SP))
+          : Array(level).fill(PBR)
+        : Array.from({ length: level }, (_, index) => (index < level ? PBR : SP)),
+      isLastNode ? BRE : BR,
+      node.name,
+      node.dir ? '/' : '',
+    ]
+      .flat()
+      .join('');
+
+    stringified += line;
+    stringified += stringifyBranches(node.branches, level + 1, isLastNode);
+  }
+
+  return stringified;
 };

@@ -2,10 +2,11 @@ import React from 'react';
 import { Box, render } from 'ink';
 
 // * utils
-import { createDirectoryTree } from './utils/index.js';
+import { createDirectoryTree, stringifyBranches } from './utils/index.js';
 
 const App = () => {
-  console.log(createDirectoryTree('./', '.'));
+  const tree = createDirectoryTree('./', '.');
+  console.log(stringifyBranches(tree.branches));
 
   return <Box></Box>;
 };
