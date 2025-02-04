@@ -1,4 +1,5 @@
 import fs from 'fs';
+import chalk from 'chalk';
 
 // * fast-glob
 import fastGlob from 'fast-glob';
@@ -12,6 +13,8 @@ const BRE = '└── '; // * Branch End
 const PBR = '│   '; // * Pre Branch
 
 // * types
+import { type ForegroundColorName as Color } from 'chalk';
+
 type Branches = Tree['branches'];
 
 type Tree = { name: string; fullPath: string; branches: Tree[]; dir?: boolean };
@@ -63,6 +66,7 @@ export const createDirectoryTree = (root: string, options: TreeOptions = {}) => 
 export const stringifyBranches = (
   branches: Branches,
   activePath: string,
+  color: Color,
   level: number = 0,
   isParentLastNode: boolean = false
 ) => {
@@ -81,7 +85,7 @@ export const stringifyBranches = (
           : Array(level).fill(PBR)
         : Array.from({ length: level }, (_, index) => (index < level ? PBR : SP)),
       isLastNode ? BRE : BR,
-      activePath === node.fullPath ? '\u25CF ' : '',
+      activePath === node.fullPath ? chalk[color]('\u25CF ') : '',
       node.name,
       node.dir ? '/' : '',
     ]
@@ -89,14 +93,14 @@ export const stringifyBranches = (
       .join('');
 
     stringified += line;
-    stringified += stringifyBranches(node.branches, activePath, level + 1, isLastNode);
+    stringified += stringifyBranches(node.branches, activePath, color, level + 1, isLastNode);
   }
 
   return stringified;
 };
 
-export const stringifyTree = (tree: Tree, activePath: string) => {
-  return tree.name + stringifyBranches(tree.branches, activePath);
+export const stringifyTree = (tree: Tree, activePath: string, color: Color) => {
+  return tree.name + stringifyBranches(tree.branches, activePath, color);
 };
 
 export const flattenTree = (tree: Tree): string[] => {

@@ -1,11 +1,11 @@
-import { Box, Text, useInput, type TextProps } from 'ink';
+import { Box, Text, useInput } from 'ink';
 import React, { useMemo, useState, useEffect } from 'react';
 
 // * utils
 import { flattenTree, stringifyTree, createDirectoryTree } from '../utils/index.js';
 
 // * types
-export type Color = TextProps['color'];
+import { type ForegroundColorName as Color } from 'chalk';
 
 export type TreeSelectProps = {
   root: string;
@@ -51,9 +51,7 @@ export const TreeSelect = ({ root, onChange, onSelect, options = {} }: TreeSelec
 
   return (
     <Box flexDirection='column' rowGap={1}>
-      <Text dimColor color={indicatorColor}>
-        {stringifyTree(tree, activePath)}
-      </Text>
+      <Text dimColor>{stringifyTree(tree, activePath, indicatorColor)}</Text>
       <Text dimColor color={previewColor ?? 'blue'}>
         {activePath}
       </Text>
