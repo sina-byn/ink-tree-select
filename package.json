@@ -1,0 +1,56 @@
+{
+  "name": "ink-tree-select",
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "module",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.js"
+  },
+  "repository": "github:sina-byn/ink-tree-select",
+  "homepage": "https://github.com/sina-byn/ink-tree-select#readme",
+  "description": "Directory tree select component for ink",
+  "author": "Sina Bayandorian <sina.sina.bayan@protonmail.com> (https://sina-byn.netlify.app/)",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsup-node",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "fast-glob": "^3.3.3"
+  },
+  "peerDependencies": {
+    "ink": "^4.1.0",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@sindresorhus/tsconfig": "^3.0.1",
+    "@types/node": "^22.13.0",
+    "@types/react": "^18.0.32",
+    "ink": "^5.1.0",
+    "react": "^18.2.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.0.3"
+  },
+  "bugs": {
+    "url": "https://github.com/sina-byn/ink-tree-select/issues",
+    "email": "sina.sina.bayan@protonmail.com"
+  },
+  "keywords": [
+    "cli",
+    "terminal",
+    "nodejs",
+    "ink",
+    "react",
+    "typescript",
+    "javascript"
+  ]
+}
