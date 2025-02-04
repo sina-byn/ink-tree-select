@@ -4,6 +4,9 @@ import React, { useMemo, useState, useEffect } from 'react';
 // * utils
 import { flattenTree, stringifyTree, Tree } from '../utils/index.js';
 
+// * components
+import Hint from './Hint.js';
+
 // * types
 import { type ForegroundColorName as Color } from 'chalk';
 
@@ -53,6 +56,7 @@ export const VirtualTreeSelect = ({
 
   return (
     <Box flexDirection='column' rowGap={1}>
+      <Hint />
       <Text>{stringifyTree(tree, activePath, indicatorColor)}</Text>
       <Text color={previewColor ?? 'blue'}>{activePath}</Text>
     </Box>
