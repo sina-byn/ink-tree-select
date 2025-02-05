@@ -7,21 +7,7 @@ import { createDirectoryTree } from '../utils/index.js';
 import { VirtualTreeSelect } from './VirtualTreeSelect.js';
 
 // * types
-import { type ForegroundColorName as Color } from 'chalk';
-
-export type TreeSelectProps = {
-  root: string;
-  options?: TreeSelectOptions;
-  onChange?: (activePath: string) => void;
-  onSelect?: (selectedPath: string) => void;
-};
-
-export type TreeSelectOptions = Partial<{
-  ignore: string[];
-  rootAlias: string;
-  previewColor: Color;
-  indicatorColor: Color;
-}>;
+import type { TreeSelectProps } from '../types/inedx.js';
 
 export const TreeSelect = ({ root, onChange, onSelect, options = {} }: TreeSelectProps) => {
   const { ignore, rootAlias, previewColor, indicatorColor } = options;

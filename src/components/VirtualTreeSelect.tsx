@@ -2,25 +2,13 @@ import { Box, Text, useInput } from 'ink';
 import React, { useMemo, useState, useEffect } from 'react';
 
 // * utils
-import { flattenTree, stringifyTree, type Tree } from '../utils/index.js';
+import { flattenTree, stringifyTree } from '../utils/index.js';
 
 // * components
 import Hint from './Hint.js';
 
 // * types
-import { type ForegroundColorName as Color } from 'chalk';
-
-export type VirtualTreeSelectProps = {
-  tree: Tree;
-  options?: VirtualTreeSelectOptions;
-  onChange?: (activePath: string) => void;
-  onSelect?: (selectedPath: string) => void;
-};
-
-export type VirtualTreeSelectOptions = Partial<{
-  previewColor: Color;
-  indicatorColor: Color;
-}>;
+import type { VirtualTreeSelectProps } from '../types/inedx.js';
 
 export const VirtualTreeSelect = ({
   tree,

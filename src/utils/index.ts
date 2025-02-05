@@ -13,13 +13,7 @@ const BRE = '└── '; // * Branch End
 const PBR = '│   '; // * Pre Branch
 
 // * types
-import { type ForegroundColorName as Color } from 'chalk';
-
-type Branches = Tree['branches'];
-
-export type Tree = { name: string; fullPath: string; branches: Tree[]; dir?: boolean };
-
-type TreeOptions = Partial<{ rootAlias: string; ignore: string[] }>;
+import { Tree, Color, Branches, TreeOptions } from '../types/inedx.js';
 
 export const readDirectory = (root: string, ignore: string[]) => {
   if (!fs.existsSync(root)) throw new Error(`Could not find '${root}'`);
