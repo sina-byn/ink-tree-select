@@ -20,7 +20,7 @@ export const VirtualTreeSelect = ({
   const [selected, setSelected] = useState<boolean>(false);
   const { previewColor, indicatorColor } = options;
 
-  const flattenedTree = useMemo(() => flattenTree(tree), [tree]);
+  const flattenedTree = useMemo(() => flattenTree(tree).slice(1), [tree]);
   const activePath = flattenedTree[activeIndex]!;
   const maxIndex = flattenedTree.length - 1;
 

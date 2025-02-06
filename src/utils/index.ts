@@ -62,7 +62,9 @@ export const stringifyBranches = (
   activePath: string,
   color: Color,
   level: number = 0,
-  isParentLastNode: boolean = false
+  parents: number[] = []
+  // * [0, 1] ==> previous parents if 1 parent is the last node of the level
+  // * if 1 parent is not the last node of the level
 ) => {
   if (branches.length === 0) return '';
   const fmt = chalk[color];
@@ -75,11 +77,7 @@ export const stringifyBranches = (
 
     const line = [
       LF,
-      isLastNode
-        ? isParentLastNode
-          ? Array.from({ length: level }, (_, index) => (index < level - 1 ? PBR : SP))
-          : Array(level).fill(PBR)
-        : Array.from({ length: level }, (_, index) => (index < level ? PBR : SP)),
+      ...parents.map(p => (p === 0 ? PBR : SP)),
       isLastNode ? BRE : BR,
       isActivePath ? fmt('\u25CF ') : '',
       isActivePath ? fmt(node.name) : node.name,
@@ -88,8 +86,10 @@ export const stringifyBranches = (
       .flat()
       .join('');
 
+    const newParents = [...parents, isLastNode ? 1 : 0];
+
     stringified += line;
-    stringified += stringifyBranches(node.branches, activePath, color, level + 1, isLastNode);
+    stringified += stringifyBranches(node.branches, activePath, color, level + 1, newParents);
   }
 
   return stringified;
@@ -100,7 +100,5 @@ export const stringifyTree = (tree: Tree, activePath: string, color: Color = 'bl
 };
 
 export const flattenTree = (tree: Tree): string[] => {
-  return tree.fullPath === './'
-    ? tree.branches.flatMap(flattenTree)
-    : [tree.fullPath, ...tree.branches.flatMap(flattenTree)];
+  return [tree.fullPath, ...tree.branches.flatMap(flattenTree)];
 };
