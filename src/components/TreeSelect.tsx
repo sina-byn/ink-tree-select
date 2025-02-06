@@ -7,7 +7,7 @@ import { createDirectoryTree } from '../utils/index.js';
 import { VirtualTreeSelect } from './VirtualTreeSelect.js';
 
 // * types
-import type { TreeSelectProps } from '../types/inedx.js';
+import type { TreeSelectProps } from '../types/index.js';
 
 export const TreeSelect = ({ root, onChange, onSelect, options = {} }: TreeSelectProps) => {
   const { ignore, rootAlias, previewColor, indicatorColor } = options;

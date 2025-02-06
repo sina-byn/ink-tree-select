@@ -8,7 +8,7 @@ import { flattenTree, stringifyTree } from '../utils/index.js';
 import Hint from './Hint.js';
 
 // * types
-import type { VirtualTreeSelectProps } from '../types/inedx.js';
+import type { VirtualTreeSelectProps } from '../types/index.js';
 
 export const VirtualTreeSelect = ({
   tree,

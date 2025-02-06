@@ -13,7 +13,7 @@ const BRE = '└── '; // * Branch End
 const PBR = '│   '; // * Pre Branch
 
 // * types
-import { Tree, Color, Branches, TreeOptions } from '../types/inedx.js';
+import type { Tree, Color, Branches, TreeOptions } from '../types/index.js';
 
 export const readDirectory = (root: string, ignore: string[]) => {
   if (!fs.existsSync(root)) throw new Error(`Could not find '${root}'`);
